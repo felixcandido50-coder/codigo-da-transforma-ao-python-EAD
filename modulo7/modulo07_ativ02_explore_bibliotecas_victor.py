@@ -1,15 +1,12 @@
-import utilidades
+from datetime import date
 
 
-num1 = 10
-num2 = 5
+data_atual = date.today()
 
+fim_do_ano = date(data_atual.year, 12, 31)
 
-print ('"""Teste de utilidades"""')
-print(f'numeros utilizados: {num1} e {num2}')
+dias_restantes = (fim_do_ano - data_atual).days
 
-
-print(f' Usando Adição ({num1} + {num2}) :', utilidades.soma(num1, num2)')
-
-print(f' Usando Adição ({num1} - {num2}) :',
-utilidades.subtrair(num1, num2))
+print("--- Calculadora de Dias para o Fim do Ano ---")
+print(f"Data de hoje: {data_atual.strftime('%d/%m/%Y')}")
+print(f"Faltam {dias_restantes} dias para o ano acabar!")
