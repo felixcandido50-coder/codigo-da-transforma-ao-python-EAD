@@ -1,0 +1,35 @@
+'''
+
+
+
+'''
+
+import sqlite3
+
+conexao = sqlite3.connect("sistema.db")
+cursor = conexao.cursor()
+
+# Inserindo alguns dados extras para testar os filtros
+novos_clientes = [
+    ("Alice Souza", "alice@email.com"),
+    ("Amanda Lima", "amanda@email.com"),
+    ("Carlos Eduardo", "carlos@email.com"),
+]
+cursor.executemany(
+    "INSERT INTO Clientes (nome, email) VALUES (?, ?)", novos_clientes
+)
+conexao.commit()
+
+# Filtro 1: Nomes que começam com "A"
+print("--- Clientes que começam com 'A' ---")
+cursor.execute("SELECT * FROM Clientes WHERE nome LIKE 'A%'")
+for c in cursor.fetchall():
+    print(c)
+
+# Filtro 2: Buscar cliente por e-mail específico
+print("\n--- Busca por e-mail específico ---")
+cursor.execute("SELECT * FROM Clientes WHERE email = 'carlos@email.com'")
+for c in cursor.fetchall():
+    print(c)
+
+conexao.close()
